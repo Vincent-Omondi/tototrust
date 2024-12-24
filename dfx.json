@@ -1,0 +1,27 @@
+{
+  "canisters": {
+    "tototrust_backend": {
+      "candid": "src/tototrust_backend/tototrust_backend.did",
+      "package": "tototrust_backend",
+      "type": "rust"
+    },
+    "tototrust_frontend": {
+      "dependencies": [
+        "tototrust_backend"
+      ],
+      "source": [
+        "src/tototrust_frontend/dist"
+      ],
+      "type": "assets",
+      "workspace": "tototrust_frontend"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
