@@ -3,12 +3,24 @@ import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import environment from 'vite-plugin-environment';
 import dotenv from 'dotenv';
+import * as sass from 'sass';
 
 dotenv.config({ path: '../../.env' });
 
 export default defineConfig({
   build: {
     emptyOutDir: true,
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        implementation: sass,
+        sassOptions: {
+          fiber: false,
+          charset: false
+        }
+      }
+    }
   },
   optimizeDeps: {
     esbuildOptions: {
@@ -24,6 +36,8 @@ export default defineConfig({
         changeOrigin: true,
       },
     },
+    port: 3000,
+    strictPort: true,
   },
   plugins: [
     react(),
@@ -38,6 +52,10 @@ export default defineConfig({
           new URL("../declarations", import.meta.url)
         ),
       },
+      {
+        find: '@',
+        replacement: fileURLToPath(new URL('./src', import.meta.url))
+      }
     ],
     dedupe: ['@dfinity/agent'],
   },
